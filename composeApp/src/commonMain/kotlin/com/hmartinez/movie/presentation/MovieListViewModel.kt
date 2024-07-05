@@ -7,18 +7,20 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.hmartinez.movie.data.MoviesPagingSource
 import com.hmartinez.movie.data.MoviesRepository
+import com.hmartinez.movie.domain.GetPopularMoviesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class MovieListViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
+class MovieListViewModel(private val getPopularMoviesUseCase: GetPopularMoviesUseCase) :
+    ViewModel() {
     private val _uiState = MutableStateFlow(MovieListUiState(emptyList()))
     val uiState: StateFlow<MovieListUiState> = _uiState.asStateFlow()
 
     val flow = Pager(
         PagingConfig(pageSize = 20)
     ) {
-        MoviesPagingSource(moviesRepository)
+        MoviesPagingSource(getPopularMoviesUseCase)
     }.flow
         .cachedIn(viewModelScope)
 

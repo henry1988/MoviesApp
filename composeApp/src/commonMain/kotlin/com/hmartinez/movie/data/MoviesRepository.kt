@@ -1,8 +1,8 @@
 package com.hmartinez.movie.data
 
-import app.moviebase.tmdb.model.TmdbMoviePageResult
+import com.hmartinez.movie.domain.models.MoviesPage
 
 interface MoviesRepository {
-    suspend fun getPopularMovies(page: Int): TmdbMoviePageResult
+    suspend fun getPopularMovies(page: Int): MoviesPage
 }
 
