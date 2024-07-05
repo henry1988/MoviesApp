@@ -1,4 +1,4 @@
-package presentation
+package com.hmartinez.movie.presentation
 
 import app.moviebase.tmdb.model.TmdbMovie
 

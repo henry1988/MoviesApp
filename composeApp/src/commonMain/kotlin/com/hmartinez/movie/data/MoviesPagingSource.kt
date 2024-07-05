@@ -1,11 +1,11 @@
-package data
+package com.hmartinez.movie.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import app.moviebase.tmdb.Tmdb3
 import app.moviebase.tmdb.model.TmdbMovie
 
-class MoviesPagingSource(private val moviesApi: Tmdb3) : PagingSource<Int, TmdbMovie>() {
+class MoviesPagingSource(private val moviesRepository: MoviesRepository) :
+    PagingSource<Int, TmdbMovie>() {
     override fun getRefreshKey(state: PagingState<Int, TmdbMovie>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
@@ -16,13 +16,8 @@ class MoviesPagingSource(private val moviesApi: Tmdb3) : PagingSource<Int, TmdbM
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TmdbMovie> {
         try {
             val nextPageNumber = params.key ?: 1
-            val response = moviesApi.discover.discoverMovie(
-                page = nextPageNumber, language = "en-US", parameters = hashMapOf(
-                    "include_adult" to "false",
-                    "include_video" to "false",
-                    "sort_by" to "popularity.desc"
-                )
-            )
+            val response = moviesRepository.getPopularMovies(nextPageNumber)
+
             return LoadResult.Page(
                 data = response.results,
                 prevKey = null, // Only paging forward.

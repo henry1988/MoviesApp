@@ -1,17 +1,17 @@
-package data
+package com.hmartinez.movie.data
 
 import MoviesComponent
 import app.moviebase.tmdb.Tmdb3
 import app.moviebase.tmdb.model.TmdbMoviePageResult
 
-class MoviesRepository(
+class MoviesRepositoryImpl(
     private val tmdbApi: Tmdb3 = MoviesComponent.tmdbApi
-) {
+) : MoviesRepository {
 
-    suspend fun getPopularMovies(): TmdbMoviePageResult {
+    override suspend fun getPopularMovies(page: Int): TmdbMoviePageResult {
 
         val result: TmdbMoviePageResult = tmdbApi.discover.discoverMovie(
-            page = 1, language = "en-US", parameters = hashMapOf(
+            page = page, language = "en-US", parameters = hashMapOf(
                 "include_adult" to "false",
                 "include_video" to "false",
                 "sort_by" to "popularity.desc"

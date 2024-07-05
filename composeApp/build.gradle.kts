@@ -52,6 +52,11 @@ kotlin {
             implementation(libs.tmdb.api)
             implementation(libs.paging.common)
             implementation(libs.paging.compose.common)
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+
 
         }
         iosMain.dependencies {
