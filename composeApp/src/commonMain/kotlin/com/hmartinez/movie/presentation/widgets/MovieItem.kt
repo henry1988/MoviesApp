@@ -18,10 +18,10 @@ import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
 @Composable
-fun MovieItem(movie: Movie, onItemClick: (Movie) -> Unit) {
+fun MovieItem(movie: Movie, onItemClick: (Int) -> Unit) {
     Column(
         modifier = Modifier
-            .clickable { onItemClick(movie) }
+            .clickable { onItemClick(movie.id) }
             .padding(8.dp)
     ) {
 

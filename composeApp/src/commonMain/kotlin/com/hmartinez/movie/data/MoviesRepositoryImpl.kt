@@ -3,6 +3,7 @@ package com.hmartinez.movie.data
 import MoviesComponent
 import app.moviebase.tmdb.Tmdb3
 import app.moviebase.tmdb.model.TmdbMoviePageResult
+import com.hmartinez.movie.domain.models.Movie
 import com.hmartinez.movie.domain.models.MoviesPage
 
 class MoviesRepositoryImpl(
@@ -21,5 +22,9 @@ class MoviesRepositoryImpl(
 
         return toMoviePage(result)
 
+    }
+
+    override suspend fun getMovieDetail(movieId: Int): Movie {
+        return toMovie(tmdbApi.movies.getDetails(movieId, language = "en-US"))
     }
 }

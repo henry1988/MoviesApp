@@ -2,8 +2,7 @@ package com.hmartinez.movie.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import app.moviebase.tmdb.model.TmdbMovie
-import com.hmartinez.movie.domain.GetPopularMoviesUseCase
+import com.hmartinez.movie.domain.usecases.GetPopularMoviesUseCase
 import com.hmartinez.movie.domain.models.Movie
 
 class MoviesPagingSource(private val getPopularMoviesUseCase: GetPopularMoviesUseCase) :

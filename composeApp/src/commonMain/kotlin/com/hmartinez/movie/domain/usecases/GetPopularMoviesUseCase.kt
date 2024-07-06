@@ -1,4 +1,4 @@
-package com.hmartinez.movie.domain
+package com.hmartinez.movie.domain.usecases
 
 import com.hmartinez.movie.data.MoviesRepository
 import com.hmartinez.movie.domain.models.MoviesPage
